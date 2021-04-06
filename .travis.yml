@@ -1,11 +1,32 @@
+sudo: required
 language: python
+
 python:
 - 3.6
+
+services:
+- docker
+
 install:
   - pip install -r requirements.txt
 
 script:
   - coverage run tests.py
+  - docker image build -t cps847group16/docker-repo .
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push cps847group16/docker-repo
+  - docker ps -a
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "a2-group16"
+  env: "A2group16-env"
+  bucket_name: "elasticbeanstalk-us-east-2-987423242630"
+  on:
+   branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY 
