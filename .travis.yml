@@ -12,12 +12,12 @@ install:
 
 script:
   - coverage run tests.py
-  - docker image build -t cps847group16/docker-repo .
+  - docker image build -t ultimatesavage/traviscipython .
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push cps847group16/docker-repo
+  - docker push ultimatesavage/traviscipython
   - docker ps -a
 
 deploy:
