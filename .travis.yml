@@ -27,6 +27,6 @@ deploy:
   env: "A2group16-env"
   bucket_name: "elasticbeanstalk-us-east-2-987423242630"
   on:
-   branch: master
+   branch: main
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY 
