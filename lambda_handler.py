@@ -5,3 +5,4 @@ def lambda_handler(event, context):
         'statusCode': 200,
         'output': event.get('first_name') + ' ' + event.get('last_name')
     }
+
